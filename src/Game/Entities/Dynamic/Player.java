@@ -203,7 +203,6 @@ public class Player {
 			handler.getWorld().body.removeLast();
 			handler.getWorld().body.addFirst(new Tail(x, y,handler));
 		}
-
 	}
 
 	public void render(Graphics g,Boolean[][] playeLocation){
@@ -218,11 +217,8 @@ public class Player {
 							handler.getWorld().GridPixelsize,
 							handler.getWorld().GridPixelsize);
 				}
-
 			}
 		}
-
-
 	}
 
 	public void Eat(){
