@@ -47,7 +47,7 @@ public class DisplayScreen {
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
-        canvas.setBackground(new Color(128,0,128));
+        canvas.setBackground(new Color(128,0,128)); //change literal color to rgb color 
 
         frame.add(canvas);
         frame.pack();
@@ -60,5 +60,4 @@ public class DisplayScreen {
     public JFrame getFrame(){
         return frame;
     }
-
 }
