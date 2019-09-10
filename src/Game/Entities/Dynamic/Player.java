@@ -13,7 +13,7 @@ public class Player {
 
 	public int lenght;
 	public int score;
-	public int currentScore; // Score variables
+	public int currentScore;
 	public boolean justAte;
 	private Handler handler;
 
@@ -32,7 +32,7 @@ public class Player {
 		direction= "Right";
 		justAte = false;
 		lenght= 1;
-		score = 0; // Start score
+		score = 0;
 		currentScore = 0;
 		
 
@@ -225,7 +225,6 @@ public class Player {
 			}
 		}
 		
-		// Score variable and set visible the score 
 		int score = (int) Math.ceil(Math.sqrt(2*currentScore+1));
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
@@ -236,9 +235,7 @@ public class Player {
 	}
 
 	public void Eat(){
-		// Score counter
 		currentScore++;
-		
 		lenght++;
 		Tail tail= null;
 		handler.getWorld().appleLocation[xCoord][yCoord]=false;
