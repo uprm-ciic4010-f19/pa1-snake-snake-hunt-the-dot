@@ -12,6 +12,8 @@ import java.util.Random;
 public class Player {
 
 	public int lenght;
+	public int score;
+	public int currentScore; // Score variables
 	public boolean justAte;
 	private Handler handler;
 
@@ -30,6 +32,9 @@ public class Player {
 		direction= "Right";
 		justAte = false;
 		lenght= 1;
+		score = 0; // Start score
+		currentScore = 0;
+		
 
 	}
 
@@ -219,9 +224,21 @@ public class Player {
 				}
 			}
 		}
+		
+		// Score variable and set visible the score 
+		int score = (int) Math.ceil(Math.sqrt(2*currentScore+1));
+		
+		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
+		g.setColor(Color.lightGray);
+		g.drawString("Score: " + score, 10, 40);
+		
+		
 	}
 
 	public void Eat(){
+		// Score counter
+		currentScore++;
+		
 		lenght++;
 		Tail tail= null;
 		handler.getWorld().appleLocation[xCoord][yCoord]=false;
