@@ -21,6 +21,7 @@ public class Player {
 	public int yCoord;
 
 	public int moveCounter;
+	public int speedSnake;
 
 	public String direction;//is your first name one?
 
@@ -34,22 +35,33 @@ public class Player {
 		lenght= 1;
 		score = 0;
 		currentScore = 0;
+		speedSnake = 25;
 		
 
 	}
 
 	public void tick(){
 		moveCounter++;
-		if(moveCounter>=12) {
+		if(moveCounter>=speedSnake) {
 			checkCollisionAndMove();
-			moveCounter=0;
-		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
+			moveCounter=6;
+		}
+		
+		//Change the speed of the snake
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){
+			--speedSnake;
+
+		}if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){
+			++speedSnake;
+		}
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction!="Down"){
 			direction="Up";
-		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
+		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && direction!="Up"){
 			direction="Down";
-		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
+		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT) && direction!="Right"){
 			direction="Left";
-		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
+		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && direction!="Left"){
 			direction="Right";
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
 
