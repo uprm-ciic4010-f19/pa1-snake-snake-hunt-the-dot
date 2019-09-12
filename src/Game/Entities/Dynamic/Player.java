@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.State;
+
 /**
  * Created by AlexVR on 7/2/2018.
  */
@@ -64,6 +66,10 @@ public class Player {
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && direction!="Left"){
 			direction="Right";
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
+		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
+		 State.setState(handler.getGame().pauseState);
+		
+        
 
 			lenght++;
 			Tail tail= null;
