@@ -376,6 +376,7 @@ public class Player {
 
 			}
 		}
+		State.setState(handler.getGame().gameoverState);
 	}
 
 	public boolean isJustAte() {
