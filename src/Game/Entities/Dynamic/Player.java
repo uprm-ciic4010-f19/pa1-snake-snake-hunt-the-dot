@@ -1,12 +1,13 @@
 package Game.Entities.Dynamic;
 
-import Main.Handler;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
 import Game.GameStates.State;
+import Main.Handler;
 
 /**
  * Created by AlexVR on 7/2/2018.
@@ -65,9 +66,14 @@ public class Player {
 			direction="Left";
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && direction!="Left"){
 			direction="Right";
-		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
-		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
-		 State.setState(handler.getGame().pauseState);
+		}
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
+			 State.setState(handler.getGame().pauseState);
+			}
+		
+		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
+		
 		
         
 
