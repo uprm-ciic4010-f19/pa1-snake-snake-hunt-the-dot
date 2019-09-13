@@ -180,29 +180,34 @@ public class Player {
 		int y = yCoord;
 		switch (direction){
 		case "Left":
+			Player player = new Player(handler);
 			if(xCoord==0){
-				kill();
+//				kill();
+				xCoord = handler.getWorld().GridWidthHeightPixelCount-1; //Teleport to the right respective x coord.				
 			}else{
 				xCoord--;
 			}
 			break;
 		case "Right":
-			if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){
-				kill();
+			if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){ 
+//				kill();
+				xCoord = 0; //Teleport to the left respective x coord.
 			}else{
 				xCoord++;
 			}
 			break;
 		case "Up":
 			if(yCoord==0){
-				kill();
+//				kill();
+				yCoord = handler.getWorld().GridWidthHeightPixelCount-1; //Teleport to the lower respective x coord.
 			}else{
 				yCoord--;
 			}
 			break;
 		case "Down":
 			if(yCoord==handler.getWorld().GridWidthHeightPixelCount-1){
-				kill();
+//				kill();
+				yCoord = 0; //Teleport to the upper respective x coord.
 			}else{
 				yCoord++;
 			}
