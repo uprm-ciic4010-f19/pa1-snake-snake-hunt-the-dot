@@ -47,13 +47,12 @@ public abstract class WorldBase {
     }
     public void tick(){
 
-
-
     }
 
     public void render(Graphics g){
 
     	//Empty this method to make invisible the grid line.
     }
+
 
 }

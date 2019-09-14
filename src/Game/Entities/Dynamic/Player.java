@@ -1,10 +1,13 @@
 package Game.Entities.Dynamic;
 
-import Main.Handler;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+
+import Game.Entities.Static.Apple;
+import Main.Handler;
 
 /**
  * Created by AlexVR on 7/2/2018.
@@ -36,17 +39,17 @@ public class Player {
 		score = 0;
 		currentScore = 0;
 		speedSnake = 25;
-		
-
 	}
 
 	public void tick(){
 		moveCounter++;
+
 		if(moveCounter>=speedSnake) {
 			checkCollisionAndMove();
 			moveCounter=6;
+			System.out.println(xCoord);
 		}
-		
+
 		//Change the speed of the snake
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){
 			--speedSnake;
@@ -54,7 +57,7 @@ public class Player {
 		}if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){
 			++speedSnake;
 		}
-		
+
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction!="Down"){
 			direction="Up";
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && direction!="Up"){
@@ -178,11 +181,11 @@ public class Player {
 		handler.getWorld().playerLocation[xCoord][yCoord]=false;
 		int x = xCoord;
 		int y = yCoord;
+
 		switch (direction){
 		case "Left":
-			Player player = new Player(handler);
 			if(xCoord==0){
-//				kill();
+				//				kill();
 				xCoord = handler.getWorld().GridWidthHeightPixelCount-1; //Teleport to the right respective x coord.				
 			}else{
 				xCoord--;
@@ -190,7 +193,7 @@ public class Player {
 			break;
 		case "Right":
 			if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){ 
-//				kill();
+				//				kill();
 				xCoord = 0; //Teleport to the left respective x coord.
 			}else{
 				xCoord++;
@@ -198,7 +201,7 @@ public class Player {
 			break;
 		case "Up":
 			if(yCoord==0){
-//				kill();
+				//				kill();
 				yCoord = handler.getWorld().GridWidthHeightPixelCount-1; //Teleport to the lower respective x coord.
 			}else{
 				yCoord--;
@@ -206,7 +209,7 @@ public class Player {
 			break;
 		case "Down":
 			if(yCoord==handler.getWorld().GridWidthHeightPixelCount-1){
-//				kill();
+				//				kill();
 				yCoord = 0; //Teleport to the upper respective x coord.
 			}else{
 				yCoord++;
@@ -227,29 +230,51 @@ public class Player {
 		}
 	}
 
-	public void render(Graphics g,Boolean[][] playeLocation){
+	public void render(Graphics g,Boolean[][] playerLocation){
 		Random r = new Random();
+		Color randomColor = new Color(r.nextFloat(), r.nextFloat(), r.nextFloat()); // Randomize the colors
+		Apple apple = new Apple(handler, xCoord, yCoord);
 		for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
 			for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-				g.setColor(Color.GREEN);
 
-				if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
+				if(playerLocation[i][j]){
+
+					g.setColor(randomColor); // Paint the snake
 					g.fillRect((i*handler.getWorld().GridPixelsize),
 							(j*handler.getWorld().GridPixelsize),
 							handler.getWorld().GridPixelsize,
 							handler.getWorld().GridPixelsize);
 				}
+
+				if(handler.getWorld().appleLocation[i][j]) {
+
+					if(apple.isGood() == true) {
+						g.setColor(Color.PINK); // Paint the apple
+						g.fillRect((i*handler.getWorld().GridPixelsize),
+								(j*handler.getWorld().GridPixelsize),
+								handler.getWorld().GridPixelsize,
+								handler.getWorld().GridPixelsize);
+					}
+					if(apple.isGood() == false) {
+						g.setColor(Color.BLACK); // Paint the apple
+						g.fillRect((i*handler.getWorld().GridPixelsize),
+								(j*handler.getWorld().GridPixelsize),
+								handler.getWorld().GridPixelsize,
+								handler.getWorld().GridPixelsize);
+					}
+				}
 			}
 		}
-		
-		int score = (int) Math.ceil(Math.sqrt(2*currentScore+1));
+
+
+		int score =  (int) Math.ceil(Math.sqrt(2*currentScore+1));
 		
 		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
 		g.setColor(Color.lightGray);
 		g.drawString("Score: " + score, 10, 40);
-		
-		
+
 	}
+
 
 	public void Eat(){
 		currentScore++;
