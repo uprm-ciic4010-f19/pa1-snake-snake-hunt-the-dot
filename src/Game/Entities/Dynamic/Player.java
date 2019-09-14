@@ -39,7 +39,7 @@ public class Player {
 		score = 0;
 		currentScore = 0;
 		speedSnake = 25;
-		
+
 
 	}
 
@@ -49,7 +49,7 @@ public class Player {
 			checkCollisionAndMove();
 			moveCounter=6;
 		}
-		
+
 		//Change the speed of the snake
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){
 			--speedSnake;
@@ -57,7 +57,7 @@ public class Player {
 		}if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)){
 			++speedSnake;
 		}
-		
+
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) && direction!="Down"){
 			direction="Up";
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) && direction!="Up"){
@@ -67,15 +67,15 @@ public class Player {
 		}if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT) && direction!="Left"){
 			direction="Right";
 		}
-		
+
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){
-			 State.setState(handler.getGame().pauseState);
-			}
-		
+			State.setState(handler.getGame().pauseState);
+		}
+
 		if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)) {
-		
-		
-        
+
+
+
 
 			lenght++;
 			Tail tail= null;
@@ -232,6 +232,16 @@ public class Player {
 			handler.getWorld().body.removeLast();
 			handler.getWorld().body.addFirst(new Tail(x, y,handler));
 		}
+
+		//Added gameover when the snake touch itself
+		if(lenght > 1) {
+			for(int i=0; i < handler.getWorld().body.size(); i++) {
+				if(handler.getWorld().body.get(i).x == xCoord && handler.getWorld().body.get(i).y == yCoord) {
+					kill();
+					State.setState(handler.getGame().gameoverState);
+				}
+			}
+		}
 	}
 
 	public void render(Graphics g,Boolean[][] playeLocation){
@@ -248,14 +258,14 @@ public class Player {
 				}
 			}
 		}
-		
+
 		int score = (int) Math.ceil(Math.sqrt(2*currentScore+1));
-		
+
 		g.setFont(new Font("Times New Roman", Font.BOLD, 50));
 		g.setColor(Color.lightGray);
 		g.drawString("Score: " + score, 10, 40);
-		
-		
+
+
 	}
 
 	public void Eat(){

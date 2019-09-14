@@ -83,7 +83,7 @@ public class GameSetUp implements Runnable {
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
         pauseState = new PauseState(handler);
-        gameoverState = new GameOverState(handler);
+        gameoverState = new GameOverState(handler); //game over state created
 
         State.setState(menuState);
 
