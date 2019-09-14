@@ -7,16 +7,23 @@ import Main.Handler;
  */
 public class Apple {
 
-    private Handler handler;
+	private Handler handler;
 
-    public int xCoord;
-    public int yCoord;
+	public int xCoord;
+	public int yCoord;
 
-    public Apple(Handler handler,int x, int y){
-        this.handler=handler;
-        this.xCoord=x;
-        this.yCoord=y;
-    }
+	public Apple(Handler handler,int x, int y){
+		this.handler=handler;
+		this.xCoord=x;
+		this.yCoord=y;
+	}
 
-
+	// Method that return true if the apple is good, otherwise return false.
+	public boolean isGood() {
+		
+		if (handler.getWorld().player.xCoord >= 20)
+			return false;
+		else	
+			return true;
+	}
 }
